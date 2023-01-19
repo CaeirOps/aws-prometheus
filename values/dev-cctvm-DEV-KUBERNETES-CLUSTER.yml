@@ -1,0 +1,31 @@
+### https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
+server:
+  global:
+    external_labels:
+      environment: CCTVM-DEV
+      cluster: DEV-KUBERNETES-CLUSTER
+  persistentVolume:
+    size: 100Gi
+    storageClass: gp3
+  remoteWrite:
+  - queue_config:
+      capacity: 2500
+      max_samples_per_send: 1000
+      max_shards: 200
+    sigv4:
+      region: us-east-1
+      role_arn: arn:aws:iam::381283118079:role/amp-central-ingest-role
+    url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-8cd6fa22-f097-4686-97f1-d977cd5a6ff0/api/v1/remote_write
+  resources:
+    limits:
+      cpu: 300m
+      memory: 5Gi
+    requests:
+      cpu: 300m
+      memory: 5Gi 
+  retention: 3d
+serviceAccounts:
+  server:
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::<ID>:role/amp-iamproxy-ingest-role
+    name: amp-iamproxy-ingest-service-account
