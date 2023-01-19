@@ -43,7 +43,12 @@ cat <<EOF > PermissionPolicyIngest.json
            "aps:GetMetricMetadata"
         ], 
         "Resource": "*"
-      }
+      },
+      {
+        "Effect": "Allow",
+        "Action": "sts:AssumeRole",
+        "Resource": "arn:aws:iam::381283118079:role/amp-central-ingest-role"
+    }
    ]
 }
 EOF
