@@ -1,0 +1,16 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::830010148122:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::767508616135:role/amp-iamproxy-ingest-role"
+        ]
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {}
+    }
+  ]
+}
