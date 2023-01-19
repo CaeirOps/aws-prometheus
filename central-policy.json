@@ -6,7 +6,18 @@
       "Principal": {
         "AWS": [
           "arn:aws:iam::830010148122:role/amp-iamproxy-ingest-role",
-          "arn:aws:iam::767508616135:role/amp-iamproxy-ingest-role"
+          "arn:aws:iam::767508616135:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::033599250552:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::070405419444:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::913058495963:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::532789289433:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::033599250552:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::291798477935:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::206579873293:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::354861913969:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::963032698182:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::639781236565:role/amp-iamproxy-ingest-role",
+          "arn:aws:iam::593537068737:role/amp-iamproxy-ingest-role"
         ]
       },
       "Action": "sts:AssumeRole",
