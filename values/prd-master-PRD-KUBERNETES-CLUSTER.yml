@@ -1,11 +1,9 @@
-## The following is a set of default values for prometheus server helm chart which enable remoteWrite to AMP
-## For the rest of prometheus helm chart values see: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
-##
+## https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
 server:
   global:
     external_labels:
-      cluster: PRD-KUBERNETES-CLUSTER
       environment: MASTER-PRD
+      cluster: PRD-KUBERNETES-CLUSTER
   persistentVolume:
     size: 100Gi
     storageClass: gp3
