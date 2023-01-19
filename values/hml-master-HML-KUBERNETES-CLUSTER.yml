@@ -1,16 +1,15 @@
-### The following is a set of default values for prometheus server helm chart which enable remoteWrite to AMP
-### For the rest of prometheus helm chart values see: https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
-###
+## https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus/values.yaml
+
 serviceAccounts:
   server:
     name: amp-iamproxy-ingest-service-account
     annotations: 
-      eks.amazonaws.com/role-arn: arn:aws:iam::830010148122:role/amp-iamproxy-ingest-role
+      eks.amazonaws.com/role-arn: arn:aws:iam::767508616135:role/amp-iamproxy-ingest-role
 server:
   global:
     external_labels:
-      environment: DEV
-      cluster: DEV-KUBERNETES-CLUSTER
+      environment: MASTER-HML 
+      cluster: HML-KUBERNETES-CLUSTER
   remoteWrite:
     - url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-8cd6fa22-f097-4686-97f1-d977cd5a6ff0/api/v1/remote_write
       sigv4:
@@ -21,13 +20,16 @@ server:
         max_shards: 200
         capacity: 2500
   persistentVolume:
-    storageClass: "gp2"
+    storageClass: "gp3"
     size: 100Gi
   resources:
     limits:
-      cpu: 1500m
-      memory: 3000Mi
+      cpu: 300m
+      memory: 6Gi 
     requests:
-      cpu: 1500m
-      memory: 3000Mi
+      cpu: 300m
+      memory: 6Gi
   retention: "3d"
+
+alertmanager:
+  storageClass: "gp3"

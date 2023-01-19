@@ -4,12 +4,12 @@
     {
       "Effect": "Allow",
       "Principal": {
-        "Federated": "arn:aws:iam::033599250552:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/1B353856023A87C0BE156AE85D02974C"
+        "Federated": "arn:aws:iam::767508616135:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/24504430140D92A2FB3A759FD8BC02AA"
       },
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "oidc.eks.us-east-1.amazonaws.com/id/1B353856023A87C0BE156AE85D02974C:sub": "system:serviceaccount:aws-prometheus:amp-iamproxy-ingest-service-account"
+          "oidc.eks.us-east-1.amazonaws.com/id/24504430140D92A2FB3A759FD8BC02AA:sub": "system:serviceaccount:aws-prometheus:amp-iamproxy-ingest-service-account"
         }
       }
     }
