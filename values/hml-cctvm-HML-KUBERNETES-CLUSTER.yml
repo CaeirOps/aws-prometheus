@@ -19,10 +19,10 @@ server:
   resources:
     limits:
       cpu: 300m
-      memory: 6Gi 
+      memory: 2Gi 
     requests:
       cpu: 300m
-      memory: 6Gi
+      memory: 2Gi
   retention: "3d"
 serviceAccounts:
   server:

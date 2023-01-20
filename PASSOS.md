@@ -7,4 +7,3 @@
 - Adiona na role central (conta legado) o arn no trusted para assume role
 - Garantir um storage class GP3 (arquivo storageclass.yml) [Add-on de EBS]
 - Executar Helm (helm install aws-prometheus prometheus-community/prometheus -n aws-prometheus -f values/arquivo-do-ambiente.yml)
-- 
