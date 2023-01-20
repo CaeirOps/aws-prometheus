@@ -1,8 +1,9 @@
 #!/bin/bash -e
 CLUSTER_NAME=PRD-KUBERNETES-CLUSTER
+REGION=sa-east-1
 SERVICE_ACCOUNT_NAMESPACE=aws-prometheus
-AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --region us-east-1 --output text)
-OIDC_PROVIDER=$(aws eks describe-cluster --name $CLUSTER_NAME --region us-east-1 --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///")
+AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query "Account" --region $REGION --output text)
+OIDC_PROVIDER=$(aws eks describe-cluster --name $CLUSTER_NAME --region $REGION --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///")
 SERVICE_ACCOUNT_AMP_INGEST_NAME=amp-iamproxy-ingest-service-account
 SERVICE_ACCOUNT_IAM_AMP_INGEST_ROLE=amp-iamproxy-ingest-role
 SERVICE_ACCOUNT_IAM_AMP_INGEST_POLICY=AMPIngestPolicy
@@ -43,13 +44,18 @@ cat <<EOF > PermissionPolicyIngest.json
            "aps:GetMetricMetadata"
         ], 
         "Resource": "*"
-      }
+      },
+      {
+        "Effect": "Allow",
+        "Action": "sts:AssumeRole",
+        "Resource": "arn:aws:iam::381283118079:role/amp-central-ingest-role"
+    }
    ]
 }
 EOF
 
 function getRoleArn() {
-  OUTPUT=$(aws iam get-role --role-name $1 --query 'Role.Arn' --region us-east-1 --output text 2>&1)
+  OUTPUT=$(aws iam get-role --role-name $1 --query 'Role.Arn' --region $REGION --output text 2>&1)
 
   # Check for an expected exception
   if [[ $? -eq 0 ]]; then
@@ -74,13 +80,13 @@ then
   SERVICE_ACCOUNT_IAM_AMP_INGEST_ROLE_ARN=$(aws iam create-role \
   --role-name $SERVICE_ACCOUNT_IAM_AMP_INGEST_ROLE \
   --assume-role-policy-document file://TrustPolicy.json \
-  --query "Role.Arn" --region us-east-1 --output text)
+  --query "Role.Arn" --region $REGION --output text)
   #
   # Create an IAM permission policy
   #
   SERVICE_ACCOUNT_IAM_AMP_INGEST_ARN=$(aws iam create-policy --policy-name $SERVICE_ACCOUNT_IAM_AMP_INGEST_POLICY \
   --policy-document file://PermissionPolicyIngest.json \
-  --query 'Policy.Arn' --region us-east-1 --output text)
+  --query 'Policy.Arn' --region $REGION --output text)
   #
   # Attach the required IAM policies to the IAM role created above
   #
@@ -96,4 +102,4 @@ echo $SERVICE_ACCOUNT_IAM_AMP_INGEST_ROLE_ARN
 # Associate this IdP with AWS IAM so that the latter can validate and accept the OIDC tokens issued by Kubernetes to service accounts.
 # Doing this with eksctl is the easier and best approach.
 #
-eksctl utils associate-iam-oidc-provider --cluster $CLUSTER_NAME --approve
+eksctl utils associate-iam-oidc-provider --cluster $CLUSTER_NAME --approve --region $REGION

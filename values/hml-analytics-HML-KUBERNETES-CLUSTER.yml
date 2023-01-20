@@ -27,5 +27,5 @@ server:
 serviceAccounts:
   server:
     annotations: 
-      eks.amazonaws.com/role-arn: arn:aws:iam::<ID>:role/amp-iamproxy-ingest-role
+      eks.amazonaws.com/role-arn: arn:aws:iam::639781236565:role/amp-iamproxy-ingest-role
     name: amp-iamproxy-ingest-service-account
