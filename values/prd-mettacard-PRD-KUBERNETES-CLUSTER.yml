@@ -18,11 +18,11 @@ server:
     url: https://aps-workspaces.us-east-1.amazonaws.com/workspaces/ws-8cd6fa22-f097-4686-97f1-d977cd5a6ff0/api/v1/remote_write
   resources:
     limits:
-      cpu: 600m
-      memory: 6Gi
+      cpu: 500m
+      memory: 1Gi
     requests:
-      cpu: 600m
-      memory: 6Gi
+      cpu: 300m
+      memory: 500Mi
   retention: 3d
 serviceAccounts:
   server:
