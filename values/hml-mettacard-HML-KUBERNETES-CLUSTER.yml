@@ -2,7 +2,7 @@
 server:
   global:
     external_labels:
-      environment: METTACARD-HML 
+      environment: METTACARD-HML
       cluster: HML-KUBERNETES-CLUSTER
   persistentVolume:
     size: 100Gi

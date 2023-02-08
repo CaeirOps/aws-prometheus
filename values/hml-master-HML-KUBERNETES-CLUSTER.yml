@@ -2,7 +2,7 @@
 server:
   global:
     external_labels:
-      environment: MASTER-HML 
+      environment: MASTER-HML
       cluster: HML-KUBERNETES-CLUSTER
   persistentVolume:
     size: 100Gi

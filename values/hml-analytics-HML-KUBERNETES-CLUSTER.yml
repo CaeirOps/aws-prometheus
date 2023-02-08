@@ -2,7 +2,7 @@
 server:
   global:
     external_labels:
-      environment: ANALYTICS-HML 
+      environment: ANALYTICS-HML
       cluster: HML-KUBERNETES-CLUSTER
   persistentVolume:
     size: 100Gi
